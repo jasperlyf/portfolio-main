@@ -1,0 +1,18 @@
+/* App.css */
+.custom-card {
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: rgba(227, 186, 143, 0.95);
+}
+
+.custom-card .card-body {
+  padding: 20px;
+}
+
+.custom-card .list-group-item h4 {
+  margin-bottom: 5px;
+}
+
+.custom-card .list-group-item p {
+  margin-bottom: 0;
+}

@@ -1,0 +1,33 @@
+/* Apply styles to the bio container */
+.bio-container {
+  width: 100%;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(165, 63, 63, 0.1);
+  /* background-color: #ffffff; */
+  background-color: rgba(227, 186, 143, 0.95);
+}
+
+/* Highlighted text */
+.highlight {
+  font-weight: bold;
+  color: black; /* Change color as desired */
+}
+
+/* Headings */
+h2 {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+h3 {
+  font-size: 20px;
+  margin: 12px 0;
+}
+
+/* Paragraphs */
+p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}

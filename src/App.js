@@ -1,24 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import CryptoApp from "./component/CryptoApp";
+import WorkoutApp from "./component/WorkoutApp";
+import FoodApp from "./component/FoodApp";
+import MusicApp from "./component/MusicApp";
+import About from "./component/About";
+
+import Navbar from "./component/Navbar";
+import Footer from "./component/Footer";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="MainApp container-fluid p-3">
+        {/* Navbar fixed at the top */}
+        <Navbar />
+
+        <div className="row">
+          {/* Content section */}
+          <div className="col-lg-12 col-md-12">
+            {/* Empty column to adjust layout */}
+          </div>
+          <div className="col-lg-12 col-md-12 d-flex justify-content-center align-items-center">
+            <div className="col-lg-12 col-md-12">
+              <div className="CenteredContent">
+                <Switch>
+                  <Route exact path="/" component={MusicApp} />
+                  <Route path="/about" component={About} />
+                  <Route path="/food" component={FoodApp} />
+                  <Route path="/workout" component={WorkoutApp} />
+                  <Route path="/crypto" component={CryptoApp} />
+                  {/* Add more routes if needed */}
+                </Switch>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer fixed at the bottom right corner */}
+        <Footer className="Footer" />
+      </div>
+    </Router>
   );
 }
 
