@@ -90,7 +90,7 @@ const FoodFinderApp = () => {
   useEffect(() => {
     const fetchTextFile = async () => {
       try {
-        const response = await fetch("/data/foodData.txt");
+        const response = await fetch("/public/data/foodData.txt");
         const text = await response.text();
         const lines = text.split("\n");
 

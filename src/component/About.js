@@ -1,6 +1,4 @@
-import React from "react";
-import "./css/About.css"; // Import your CSS file
-import BasketballApp from "./BasketballApp";
+import "./css/About.css";
 
 const About = () => {
   return (
