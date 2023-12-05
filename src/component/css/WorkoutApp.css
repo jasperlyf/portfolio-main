@@ -1,18 +1,29 @@
-/* App.css */
+.workout-container {
+  width: 100%;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(165, 63, 63, 0.1);
+  /* background-color: #ffffff; */
+  background-color: white;
+}
+
+.summary-container {
+  width: 100%;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(165, 63, 63, 0.1);
+  background-color: lightgoldenrodyellow;
+}
+
 .custom-card {
   border-radius: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: rgba(227, 186, 143, 0.95);
+  background-color: white;
 }
 
-.custom-card .card-body {
-  padding: 20px;
-}
-
-.custom-card .list-group-item h4 {
-  margin-bottom: 5px;
-}
-
-.custom-card .list-group-item p {
-  margin-bottom: 0;
+.card.disabled {
+  opacity: 0.5; /* Reducing opacity to visually indicate it's disabled */
+  pointer-events: none; /* Disabling pointer events to prevent clicking */
+  filter: grayscale(100%); /* Optionally grayscale the exercise */
+  /* Add any other styling to indicate it's disabled */
 }

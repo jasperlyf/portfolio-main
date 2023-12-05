@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import "./css/WorkoutApp.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Container } from "react-bootstrap/lib/Tab";
 
 const workoutsData = {
   chest: [
@@ -39,57 +40,101 @@ const workoutsData = {
   ],
 };
 
-const WorkoutCategory = ({ category, exercises }) => (
-  <div className="col-lg-6 col-md-12 mb-4 d-flex align-items-center justify-content-center">
-    <div className="card custom-card">
-      <div className="card-body text-center">
-        <h2 className="card-title">{category}</h2>
-        <ul className="list-group">
-          {exercises.map((exercise, index) => (
-            <li key={index} className="list-group-item">
-              <h4>{exercise.exercise}</h4>
-              <p>Sets: {exercise.sets}</p>
-              <p>Reps: {exercise.reps}</p>
+const ExerciseCard = ({ exercise, sets, reps, handleClick, isSelected }) => (
+  <div
+    className={`card ${isSelected ? 'selected' : ''}`}
+    onClick={!isSelected ? () => handleClick({ exercise, sets, reps }) : null}
+  >
+    <div className="card-body">
+      <h5 className="card-title">{exercise}</h5>
+      <p className="card-text">Sets: {sets}</p>
+      <p className="card-text">Reps: {reps}</p>
+    </div>
+  </div>
+);
+
+const ExerciseList = ({ muscleGroup, exercises, handleExerciseSelection }) => (
+  <div>
+    <h2>{muscleGroup}</h2>
+    {exercises.map((exercise, index) => (
+      <ExerciseCard
+        key={index}
+        exercise={exercise.exercise}
+        sets={exercise.sets}
+        reps={exercise.reps}
+        handleClick={handleExerciseSelection}
+        isSelected={exercise.isSelected}
+      />
+    ))}
+  </div>
+);
+
+const WorkoutApp = () => {
+  const [selectedExercises, setSelectedExercises] = useState([]);
+  const summaryRef = useRef(null);
+
+  const handleExerciseSelection = (exercise) => {
+    const updatedExercises = [...selectedExercises, { ...exercise, isSelected: true }];
+    setSelectedExercises(updatedExercises);
+  };
+
+  const handleUndoSelection = () => {
+    const updatedExercises = [...selectedExercises];
+    updatedExercises.pop();
+    setSelectedExercises(updatedExercises);
+  };
+
+  const handleClearAll = () => {
+    setSelectedExercises([]);
+  };
+
+  const getTodayDate = () => {
+    const today = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    return today.toLocaleDateString(undefined, options);
+  };
+
+  const copySummaryContent = () => {
+    const summaryContent = summaryRef.current.innerText;
+    const textArea = document.createElement('textarea');
+    textArea.value = summaryContent;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+  };
+
+  return (
+    <div className="workout-container">
+            <div className="summary">
+        <h2>Summary</h2>
+        <div className="summary-container" ref={summaryRef}>        
+          <ul>
+          <p>{getTodayDate()}</p> {/* Display today's date */}
+          {selectedExercises.map((exercise, index) => (
+            <li key={index}>
+              {exercise.exercise} - Sets: {exercise.sets}, Reps: {exercise.reps}
             </li>
           ))}
-        </ul>
+        </ul></div>
+        <button onClick={handleUndoSelection}>Undo Selection</button>
+        <button onClick={handleClearAll}>Clear All</button>
+        <button onClick={copySummaryContent}>Copy Summary</button>
       </div>
+      <h2>Exercises</h2>
+      {Object.keys(workoutsData).map((muscleGroup, index) => (
+        <ExerciseList
+          key={index}
+          muscleGroup={muscleGroup}
+          exercises={workoutsData[muscleGroup].map(exercise => ({
+            ...exercise,
+            isSelected: selectedExercises.some(selected => selected.exercise === exercise.exercise),
+          }))}
+          handleExerciseSelection={handleExerciseSelection}
+        />
+      ))}
     </div>
-  </div>
-);
+  );
+};
 
-const App = () => (
-  <div className="container d-flex justify-content-center">
-    <div className="row">
-      <div className="col-lg-12 col-md-12">
-        <WorkoutCategory
-          className="category"
-          category="Chest & Triceps"
-          exercises={[...workoutsData.chest, ...workoutsData.tricep]}
-        />
-      </div>
-      <div className="col-lg-12 col-md-12">
-        <WorkoutCategory
-          category="Back & Biceps"
-          exercises={[...workoutsData.back, ...workoutsData.bicep]}
-        />
-      </div>
-    </div>
-    <div className="row">
-      <div className="col-lg-12 col-md-12">
-        <WorkoutCategory
-          category="Shoulders & Legs"
-          exercises={[...workoutsData.shoulders, ...workoutsData.legs]}
-        />
-      </div>
-      <div className="col-lg-12 col-md-12">
-        <WorkoutCategory
-          category="Abs & Cardio"
-          exercises={[...workoutsData.abs, ...workoutsData.cardio]}
-        />
-      </div>
-    </div>
-  </div>
-);
-
-export default App;
+export default WorkoutApp;

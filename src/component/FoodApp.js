@@ -26,21 +26,21 @@ const FoodFinderApp = () => {
   const [selectedCustomCuisine, setSelectedCustomCuisine] = useState("All");
 
   //Custom List
-  const [favoriteList, setFavoriteList] = useState([
-    { name: "Ding Tai Fung", cuisine: "Chinese", drinks: "N" },
-    { name: "Hai Di Lao", cuisine: "Steamboat", drinks: "N"  },
-    { name: "Tai Er", cuisine: "Chinese", drinks: "N"  },
-    { name: "Yun Nans", cuisine: "Chinese", drinks: "N"  },
-    { name: "Beauty In The Pot", cuisine: "Steamboat", drinks: "N"  },
-    { name: "Mookata", cuisine: "Thailand", drinks: "N"  },
-    { name: "The Vermillion House", cuisine: "Italian", drinks: "Y"  },
-    { name: "Chicken Rice", cuisine: "Chinese", drinks: "N"  },
-    { name: "KBBQ", cuisine: "Korean", drinks: "Y"  },
-    { name: "Al Capone's", cuisine: "Bar", drinks: "Y"  },
-  ]);
-
+  // const [favoriteList, setFavoriteList] = useState([
+  //   { name: "Ding Tai Fung", cuisine: "Chinese", drinks: "N" },
+  //   { name: "Hai Di Lao", cuisine: "Steamboat", drinks: "N"  },
+  //   { name: "Tai Er", cuisine: "Chinese", drinks: "N"  },
+  //   { name: "Yun Nans", cuisine: "Chinese", drinks: "N"  },
+  //   { name: "Beauty In The Pot", cuisine: "Steamboat", drinks: "N"  },
+  //   { name: "Mookata", cuisine: "Thailand", drinks: "N"  },
+  //   { name: "The Vermillion House", cuisine: "Italian", drinks: "Y"  },
+  //   { name: "Chicken Rice", cuisine: "Chinese", drinks: "N"  },
+  //   { name: "KBBQ", cuisine: "Korean", drinks: "Y"  },
+  //   { name: "Al Capone's", cuisine: "Bar", drinks: "Y"  },
+  // ]);
+  const [favoriteList, setFavoriteList] = useState([]);
   const [includeDrinks, setIncludeDrinks] = useState(false);
-
+  
   useEffect(() => {
     const fetchUserLocation = async () => {
       try {
@@ -66,9 +66,9 @@ const FoodFinderApp = () => {
 
     const findNearbyFood = async (latitude, longitude) => {
       try {
-        const radius = 500; // Search within a radius of 500 meters
+        const radius = 1000; // Search within a radius of 500 meters
 
-        const overpassUrl = `https://overpass-api.de/api/interpreter?data=[out:json];(node["amenity"="restaurant"]["cuisine"](around:${radius},${latitude},${longitude}););out;`;
+        const overpassUrl = `https://overpass-api.de/api/interpreter?data=[out:json];(node["amenity"~"restaurant|bar|coffee_shop|cafe"]["cuisine"](around:${radius},${latitude},${longitude}););out;`;
 
         const overpassResponse = await fetch(overpassUrl);
         if (!overpassResponse.ok) {
@@ -77,7 +77,7 @@ const FoodFinderApp = () => {
         const overpassData = await overpassResponse.json();
         setNearbyFoodPlaces(overpassData.elements);
         setSortedFoods(overpassData.elements);
-        setCustomSortedFoods(favoriteList);
+        // setCustomSortedFoods(favoriteList);
       } catch (error) {
         setError("Error fetching nearby food places.");
         console.error("Error fetching nearby food places:", error);
@@ -86,6 +86,29 @@ const FoodFinderApp = () => {
 
     fetchUserLocation();
   }, [useCurrentLocation]);
+
+  useEffect(() => {
+    const fetchTextFile = async () => {
+      try {
+        const response = await fetch("/data/foodData.txt");
+        const text = await response.text();
+        const lines = text.split("\n");
+
+        const formattedData = lines.map((line) => {
+          const [name, cuisine, drinks] = line.split(",");
+          return { name, cuisine, drinks };
+        });
+
+        setFavoriteList(formattedData);
+        setCustomSortedFoods(formattedData);
+      } catch (error) {
+        console.error("Error while fetching or parsing text file:", error);
+      }
+    };
+
+    handleCustomSort();
+    fetchTextFile();
+  }, []);
 
   //Toggle Current Location and Custom List
   const handleToggleDisplay = (value) => {
@@ -221,7 +244,7 @@ const FoodFinderApp = () => {
 
   return (
     <div className="food-container mt-4">
-      <h1 className="text-center mb-4">What to Eat?</h1>
+      <h1 className="text-center mb-4">What to Eat/Drink?</h1>
       {/* <div className="row mb-3">
         <div className="col">
           <p className="text-black">Current Location: {userLocation}</p>
@@ -308,14 +331,14 @@ const FoodFinderApp = () => {
         <div className="text-center col">
           {displayNearbyPlaces ? (
             <button className="btn btn-primary" onClick={handleRandomPicker}>
-              Pick Random Food
+              Pick Random Food/Drinks
             </button>
           ) : (
             <button
               className="btn btn-primary"
               onClick={handleRandomCustomPicker}
             >
-              Pick Random Food
+              Pick Random Food/Drinks
             </button>
           )}
         </div>
@@ -336,8 +359,7 @@ const FoodFinderApp = () => {
           {randomFood && (
             <div>
               <p>
-                Randomly Picked Food/Drinks: {randomFood} <br />
-                Google Search:
+                Randomly Picked Food/Drinks:
                 <a
                   href={googleSearchLink}
                   target="_blank"
@@ -353,7 +375,7 @@ const FoodFinderApp = () => {
       <div className="row">
         <div className="col">
           <h2 className="text-center">
-            {displayNearbyPlaces ? "Nearby Food List" : "Custom Food List"}
+            {displayNearbyPlaces ? "Nearby Recommended List" : "Custom List"}
           </h2>
           <table className="table">
             <thead>
