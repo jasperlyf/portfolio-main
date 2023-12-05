@@ -88,26 +88,21 @@ const FoodFinderApp = () => {
   }, [useCurrentLocation]);
 
   useEffect(() => {
-    const fetchTextFile = async () => {
+    const fetchJsonFile = async () => {
       try {
-        const response = await fetch("/public/data/foodData.txt");
-        const text = await response.text();
-        const lines = text.split("\n");
-
-        const formattedData = lines.map((line) => {
-          const [name, cuisine, drinks] = line.split(",");
-          return { name, cuisine, drinks };
-        });
-
-        setFavoriteList(formattedData);
-        setCustomSortedFoods(formattedData);
+        const response = await fetch('/public/data/foodData.json'); // Fetch JSON file
+        if (!response.ok) {
+          throw new Error("Failed to fetch JSON file");
+        }
+        const jsonData = await response.json(); // Parse JSON data
+        setFavoriteList(jsonData); // Set the retrieved data into state
+        setCustomSortedFoods(jsonData); // Update the custom sorted foods
       } catch (error) {
-        console.error("Error while fetching or parsing text file:", error);
+        console.error("Error while fetching or parsing JSON file:", error);
       }
     };
 
-    handleCustomSort();
-    fetchTextFile();
+    fetchJsonFile();
   }, []);
 
   //Toggle Current Location and Custom List
