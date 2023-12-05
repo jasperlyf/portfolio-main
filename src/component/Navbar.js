@@ -1,6 +1,5 @@
-// Navbar.js
 import React from "react";
-import { Link } from "react-router-dom"; // Import Link from React Router
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -15,32 +14,27 @@ const Navbar = () => {
             <li className="nav-item">
               <Link className="nav-link" to="/about">
                 {" "}
-                {/* Change "/About" to "/about" */}
                 About
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/food">
                 {" "}
-                {/* Change "/FoodApp" to "/food" */}
                 Food
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/workout">
                 {" "}
-                {/* Change "/WorkoutApp" to "/workout" */}
                 Workout
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/crypto">
                 {" "}
-                {/* Change "/CryptoApp" to "/crypto" */}
                 Crypto
               </Link>
             </li>
-            {/* Add more nav items as needed */}
           </ul>
         </div>
       </div>

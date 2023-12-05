@@ -27,10 +27,19 @@ const FoodFinderApp = () => {
 
   //Custom List
   const [favoriteList, setFavoriteList] = useState([
-    { name: "Pizza", cuisine: "Italian" },
-    { name: "Sushi", cuisine: "Japanese" },
-    { name: "Tacos", cuisine: "Mexican" },
+    { name: "Ding Tai Fung", cuisine: "Chinese", drinks: "N" },
+    { name: "Hai Di Lao", cuisine: "Steamboat", drinks: "N"  },
+    { name: "Tai Er", cuisine: "Chinese", drinks: "N"  },
+    { name: "Yun Nans", cuisine: "Chinese", drinks: "N"  },
+    { name: "Beauty In The Pot", cuisine: "Steamboat", drinks: "N"  },
+    { name: "Mookata", cuisine: "Thailand", drinks: "N"  },
+    { name: "The Vermillion House", cuisine: "Italian", drinks: "Y"  },
+    { name: "Chicken Rice", cuisine: "Chinese", drinks: "N"  },
+    { name: "KBBQ", cuisine: "Korean", drinks: "Y"  },
+    { name: "Al Capone's", cuisine: "Bar", drinks: "Y"  },
   ]);
+
+  const [includeDrinks, setIncludeDrinks] = useState(false);
 
   useEffect(() => {
     const fetchUserLocation = async () => {
@@ -124,8 +133,8 @@ const FoodFinderApp = () => {
   };
 
   const handleRandomCustomPicker = () => {
-    const randomIndex = Math.floor(Math.random() * favoriteList.length);
-    const selectedFood = favoriteList[randomIndex];
+    const randomIndex = Math.floor(Math.random() * sortedCustomFoods.length);
+    const selectedFood = sortedCustomFoods[randomIndex];
     setRandomFood(selectedFood.name || "Unnamed Place");
   };
 
@@ -188,8 +197,14 @@ const FoodFinderApp = () => {
       );
     }
 
-    if (selectedCustomCuisine === "All") {
-      customFilteredFoods = favoriteList;
+    if (includeDrinks) {
+      customFilteredFoods = customFilteredFoods.filter(
+        (favorite) => favorite.drinks === "Y"
+      );
+    } else {
+      customFilteredFoods = customFilteredFoods.filter(
+        (favorite) => favorite.drinks === "N" || "Y" || !favorite.drinks
+      );
     }
 
     setCustomSortedFoods(customFilteredFoods);
@@ -206,12 +221,12 @@ const FoodFinderApp = () => {
 
   return (
     <div className="food-container mt-4">
-      <h1 className="text-center mb-4">Nearby Food Places</h1>
-      <div className="row mb-3">
+      <h1 className="text-center mb-4">What to Eat?</h1>
+      {/* <div className="row mb-3">
         <div className="col">
           <p className="text-black">Current Location: {userLocation}</p>
         </div>
-      </div>
+      </div> */}
       <div className="row mb-3">
         <div className="text-center col">
           <label>
@@ -223,7 +238,9 @@ const FoodFinderApp = () => {
               onChange={() => handleToggleDisplay("current")}
             />
             Use Current Location
-          </label>
+          </label> 
+          </div>
+          <div className="text-center col">
           <label>
             <input
               type="radio"
@@ -263,14 +280,28 @@ const FoodFinderApp = () => {
               ))}
             </select>
           )}
-
+          {displayNearbyPlaces ? ( <div></div>
+          ) : (
+            <div className="form-check mt-2">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id="drinkCheckbox"
+                checked={includeDrinks}
+                onChange={(e) => setIncludeDrinks(e.target.checked)}
+              />
+              <label className="form-check-label" htmlFor="drinkCheckbox">
+                Drinks
+              </label>
+            </div>
+          )}
           {displayNearbyPlaces ? (
             <button className="btn btn-primary" onClick={handleSearch}>
-              Search Cuisine
+              Search
             </button>
           ) : (
             <button className="btn btn-primary" onClick={handleCustomSearch}>
-              Search Cuisine Custom
+              Search
             </button>
           )}
         </div>
@@ -305,7 +336,7 @@ const FoodFinderApp = () => {
           {randomFood && (
             <div>
               <p>
-                Randomly Picked Food: {randomFood} <br />
+                Randomly Picked Food/Drinks: {randomFood} <br />
                 Google Search:
                 <a
                   href={googleSearchLink}
@@ -321,7 +352,7 @@ const FoodFinderApp = () => {
       </div>
       <div className="row">
         <div className="col">
-          <h2>
+          <h2 className="text-center">
             {displayNearbyPlaces ? "Nearby Food List" : "Custom Food List"}
           </h2>
           <table className="table">
@@ -346,7 +377,7 @@ const FoodFinderApp = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          View on Google Map
+                          View
                         </a>
                       </td>
                     </tr>
@@ -363,7 +394,7 @@ const FoodFinderApp = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          View on Google Map
+                          View
                         </a>
                       </td>
                     </tr>

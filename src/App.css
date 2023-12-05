@@ -2,7 +2,8 @@
 .MainApp {
   display: flex;
   flex-direction: column;
-  background-image: url("https://i.pinimg.com/originals/81/fb/3f/81fb3fcc103ba6e49c7788a45e4ccdc8.jpg");
+  /* background-image: url("https://i.pinimg.com/originals/81/fb/3f/81fb3fcc103ba6e49c7788a45e4ccdc8.jpg"); */
+  background-image: url("https://w0.peakpx.com/wallpaper/496/227/HD-wallpaper-sunset-blurry-warm-hue-orange-hot-color-abstract.jpg");
   background-size: cover;
   min-height: 100vh; /* Set minimum height to cover the entire viewport height */
   /* Other styles */

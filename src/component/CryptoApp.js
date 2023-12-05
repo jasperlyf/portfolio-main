@@ -56,7 +56,6 @@ const CryptoApp = () => {
 
   return (
     <div className="crypto-container">
-      <h1 className="text-center mt-4 mb-4">Top 10 Cryptocurrencies</h1>
       <div className="table-responsive">
         <table className="table table-striped">
           <thead>

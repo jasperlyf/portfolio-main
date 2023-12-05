@@ -16,14 +16,8 @@ function App() {
   return (
     <Router>
       <div className="MainApp container-fluid p-3">
-        {/* Navbar fixed at the top */}
         <Navbar />
-
         <div className="row">
-          {/* Content section */}
-          <div className="col-lg-12 col-md-12">
-            {/* Empty column to adjust layout */}
-          </div>
           <div className="col-lg-12 col-md-12 d-flex justify-content-center align-items-center">
             <div className="col-lg-12 col-md-12">
               <div className="CenteredContent">
@@ -33,14 +27,11 @@ function App() {
                   <Route path="/food" component={FoodApp} />
                   <Route path="/workout" component={WorkoutApp} />
                   <Route path="/crypto" component={CryptoApp} />
-                  {/* Add more routes if needed */}
                 </Switch>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Footer fixed at the bottom right corner */}
         <Footer className="Footer" />
       </div>
     </Router>
