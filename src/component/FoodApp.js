@@ -195,13 +195,13 @@ const FoodFinderApp = () => {
     setCustomSortedFoods(customFilteredFoods);
   };
 
-  //Google Search Link
+  //Google Map Search Link
   const googleSearchLink = randomFood
-    ? `https://www.google.com/search?q=${encodeURIComponent(randomFood)}`
+    ? `https://www.google.com/maps?q=${encodeURIComponent(randomFood)}`
     : "";
 
   const generateGoogleSearchLink = (foodName) => {
-    return `https://www.google.com/search?q=${encodeURIComponent(foodName)}`;
+    return `https://www.google.com/maps?q=${encodeURIComponent(foodName)}`;
   };
 
   return (
@@ -329,7 +329,7 @@ const FoodFinderApp = () => {
               <tr>
                 <th>Name</th>
                 <th>Cuisine</th>
-                <th>Action</th>
+                <th>Map URL</th>
               </tr>
             </thead>
             <tbody>
@@ -346,7 +346,7 @@ const FoodFinderApp = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          View on Google
+                          View on Google Map
                         </a>
                       </td>
                     </tr>
@@ -363,7 +363,7 @@ const FoodFinderApp = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          View on Google
+                          View on Google Map
                         </a>
                       </td>
                     </tr>
