@@ -7,7 +7,7 @@ import About from "./component/About";
 import Navbar from "./component/Navbar";
 import Footer from "./component/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import "./component/css/App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {

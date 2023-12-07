@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./css/WorkoutApp.css";
 import { Container } from "react-bootstrap/lib/Tab";
 
 const workoutsData = {

@@ -1,0 +1,9 @@
+/* Summary container for WorkoutApp Page*/
+.summary-container {
+    width: 100%;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(165, 63, 63, 0.1);
+    background-color: lightgoldenrodyellow;
+  }
+  

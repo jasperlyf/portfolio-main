@@ -15,7 +15,7 @@
 
 /* Container for App Page*/
 .app-container {
-  width: calc(2 / 3 * 100vw);
+  width: calc(4 / 5 * 100vw);
   height: calc(2 / 3 * 100vh);
   max-width: 60em;
   max-height: 80vh;
@@ -40,83 +40,6 @@
   box-shadow: 0 0 0px rgba(0, 0, 0, 0.5);
 }
 
-
-/* Summary container for WorkoutApp Page*/
-.summary-container {
-  width: 100%;
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 0 10px rgba(165, 63, 63, 0.1);
-  background-color: lightgoldenrodyellow;
-}
-
-/* About*/
-.about-highlight {
-  color: burlywood; 
-}
-.about-highlight-underline {
-  color: burlywood; 
-  text-decoration: underline;
-}
-
-/* Table */
-.table {
-  color: white;
-}
-
-.btn{
-  width: 100%;
-  background-color: burlywood;
-  border: #ccc;
-}
-
-.sub-text{
-  font-size: 12px;
-}
-
-.food-drop-box{
-  width: 100%;
-  border: #ccc;
-  border-radius: 5px;;
-}
-
-.food-checkbox{
-  padding-top: 10%;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  background-color: #007bff;
-}
-
-.food-card {
-  padding: 2%;
-  background-origin: padding-box;
-  border: black;
-  border-color: white;
-  position: static;
-}
-
-.dots-container {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-}
-
-.dot {
-  height: 10px;
-  width: 10px;
-  margin: 0 5px;
-  border-radius: 50%;
-  background-color: #ccc;
-  cursor: pointer;
-}
-
-.dot.active {
-  background-color: #007bff;
-}
-
 .content {
   flex: 1; /* This will push the footer to the bottom */
 }
@@ -127,9 +50,11 @@ footer {
   padding: 20px 0;
 }
 
-/* CSS file or inside style tags */
-@media (max-width: 768px) {
-  .nav-link {
-    font-size: 0.8rem; /* Adjust the font size for smaller screens */
-  }
+/* Highlighted words*/
+.highlight {
+  color: burlywood; 
+}
+.highlight-underline {
+  color: burlywood; 
+  text-decoration: underline;
 }
