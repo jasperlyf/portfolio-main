@@ -18,7 +18,7 @@
   width: calc(4 / 5 * 100vw);
   height: calc(2 / 3 * 100vh);
   max-width: 60em;
-  max-height: 80vh;
+  max-height: 70vh;
   overflow: auto;
   padding: 30px;
   border-radius: 20px;

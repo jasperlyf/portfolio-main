@@ -44,14 +44,16 @@ const ExerciseCard = ({ exercise, sets, reps, handleClick, isSelected }) => (
   <div
     className={`card ${isSelected ? 'selected' : ''}`}
     onClick={!isSelected ? () => handleClick({ exercise, sets, reps }) : null}
+    style={{ backgroundColor: 'black', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}
   >
     <div className="card-body">
-      <h5 className="card-title">{exercise}</h5>
-      <p className="card-text">Sets: {sets}</p>
-      <p className="card-text">Reps: {reps}</p>
+      <h5 className="card-title w-text-small">{exercise}</h5>
+      <p className="card-text w-text-small">Sets: {sets}</p>
+      <p className="card-text w-text-small">Reps: {reps}</p>
     </div>
   </div>
 );
+
 
 const ExerciseList = ({ muscleGroup, exercises, handleExerciseSelection }) => (
   <div>
@@ -106,33 +108,42 @@ const WorkoutApp = () => {
 
   return (
     <div className="app-container">
-            <div className="summary">
+      <div className="summary">
         <h2>Summary</h2>
-        <div className="summary-container" ref={summaryRef}>        
+        <div className="summary-container" ref={summaryRef}>
           <ul>
-          <p>{getTodayDate()}</p> {/* Display today's date */}
-          {selectedExercises.map((exercise, index) => (
-            <li key={index}>
-              {exercise.exercise} - Sets: {exercise.sets}, Reps: {exercise.reps}
-            </li>
-          ))}
-        </ul></div>
+            <p>{getTodayDate()}</p> {/* Display today's date */}
+            {selectedExercises.map((exercise, index) => (
+              <li key={index}>
+                {exercise.exercise} - Sets: {exercise.sets}, Reps: {exercise.reps}
+              </li>
+            ))}
+          </ul></div>
         <button onClick={handleUndoSelection}>Undo Selection</button>
         <button onClick={handleClearAll}>Clear All</button>
         <button onClick={copySummaryContent}>Copy Summary</button>
       </div>
-      <h2>Exercises</h2>
-      {Object.keys(workoutsData).map((muscleGroup, index) => (
-        <ExerciseList
-          key={index}
-          muscleGroup={muscleGroup}
-          exercises={workoutsData[muscleGroup].map(exercise => ({
-            ...exercise,
-            isSelected: selectedExercises.some(selected => selected.exercise === exercise.exercise),
-          }))}
-          handleExerciseSelection={handleExerciseSelection}
-        />
-      ))}
+      <div className="row">
+        <div className="text-center col-12">
+          <h2>Exercises</h2>
+        </div>
+      </div>
+      <div className="row">
+        <div className="text-center col-12">
+          {Object.keys(workoutsData).map((muscleGroup, index) => (
+            <div key={index}>
+              <ExerciseList
+                muscleGroup={muscleGroup}
+                exercises={workoutsData[muscleGroup].map(exercise => ({
+                  ...exercise,
+                  isSelected: selectedExercises.some(selected => selected.exercise === exercise.exercise),
+                }))}
+                handleExerciseSelection={handleExerciseSelection}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

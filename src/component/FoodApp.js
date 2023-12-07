@@ -235,7 +235,7 @@ const FoodFinderApp = () => {
         <div className="col-8">
           {/* Choose current location or Use custom list */}
           <div className="row col-12">
-            <div className="food-card text-center col-5">
+            <div className="food-card text-center col-12 col-md-5">
               <label>
                 <input
                   type="radio"
@@ -249,7 +249,8 @@ const FoodFinderApp = () => {
               <div className="sub-text">Search for the nearest places to eat or drink from your current location.</div>
             </div>
             <div className="col-2">{" "}</div>
-            <div className="food-card text-center col-5">
+            <br />
+            <div className="food-card text-center col-12 col-md-5">
               <label>
                 <input
                   type="radio"
@@ -267,7 +268,7 @@ const FoodFinderApp = () => {
 
           {/*  Search function */}
           <div className="row col-12 food-card">
-            <div className="col-9">
+            <div className="col-12 col-md-9">
               {displayNearbyPlaces ? (
                 <select
                   className="form-select food-drop-box"
@@ -309,7 +310,7 @@ const FoodFinderApp = () => {
                 </div>
               )}
             </div>
-            <div className="col-3 p-1">
+            <div className="col-6 col-md-3 p-2">
               {displayNearbyPlaces ? (
                 <button className="btn btn-primary" onClick={handleSearch}>
                   Search
@@ -331,32 +332,31 @@ const FoodFinderApp = () => {
               <div className="food-card">
                 <p>Random Food/Drink Generator</p>
                 {displayNearbyPlaces ? (
-                  <button className="btn btn-primary" onClick={handleRandomPicker}>
-                    Random Food/Drinks
+                  <button className="btn btn-primary col-10" onClick={handleRandomPicker}>
+                    Random
                   </button>
                 ) : (
                   <button
-                    className="btn btn-primary"
+                    className="btn btn-primary col-10"
                     onClick={handleRandomCustomPicker}
                   >
-                    Random Food/Drinks
+                    Random
                   </button>
                 )}
-                <div className="text-center food-card">
+                <div className="text-center">
+                  <br />
                   {randomFood && (
-                    <div className="food-card">
-                      <p>
-                        Food/Drinks:
-                        <a
-                          href={googleSearchLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="highlight-underline"
-                        >
-                          {" " + randomFood}
-                        </a>
-                      </p>
-                    </div>
+                    <p>
+                      Food/Drinks:
+                      <a
+                        href={googleSearchLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="highlight-underline"
+                      >
+                        {" " + randomFood}
+                      </a>
+                    </p>
                   )}
                 </div>
               </div>
@@ -369,14 +369,14 @@ const FoodFinderApp = () => {
 
       {/* List of Food/Drinks */}
       <div className="row">
-        <div className="col-10">
+        <div className="col-12 col-md-10">
           <h2 className="text-center">
             {displayNearbyPlaces ? "Nearby Recommended List" : "Custom List"}
           </h2>
         </div>
 
         {/*  Sort function */}
-        <div className="col-2">
+        <div className="col-12 col-md-2">
           {displayNearbyPlaces ? (
             <button className="btn btn-secondary" onClick={handleSort}>
               {sortByAsc ? <img
@@ -458,7 +458,7 @@ const FoodFinderApp = () => {
           </table>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
