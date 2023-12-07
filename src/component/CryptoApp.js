@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./css/CryptoApp.css";
 
 const CryptoApp = () => {
   const [cryptoData, setCryptoData] = useState([]);
   const [fearAndGreedIndex, setFearAndGreedIndex] = useState(null);
+  const [lastRSI, setLastRSI] = useState(null);
 
   useEffect(() => {
     const fetchCryptoData = async () => {
@@ -26,21 +26,54 @@ const CryptoApp = () => {
         console.error("Error fetching crypto data:", error);
       }
     };
+    fetchCryptoData();
+  }, []);
 
+  useEffect(() => {
     const fetchFearAndGreedIndex = async () => {
       try {
-        const response = await axios.get(
-          "https://api.coingecko.com/api/v3/indices/fear_and_greed"
+        const response = await fetch(
+          "https://api.alternative.me/fng/"
         );
-        setFearAndGreedIndex(response.data);
+        const data = await response.json();
+        setFearAndGreedIndex(data);
       } catch (error) {
         console.error("Error fetching Fear and Greed Index data:", error);
       }
     };
 
-    fetchCryptoData();
     fetchFearAndGreedIndex();
   }, []);
+
+  const calculateRSI = () => {
+    // Simulated RSI value (for demonstration purposes)
+    const simulatedRSI = Math.floor(Math.random() * 100);
+    setLastRSI(simulatedRSI);
+  };
+
+
+  useEffect(() => {
+    // Fetch RSI or perform real-time calculations here
+    // For the purpose of this example, we simulate RSI calculation
+    calculateRSI();
+  }, []);
+
+  const handleTradeDecision = () => {
+    if (lastRSI) {
+      if (lastRSI < 30) {
+        console.log('Buy Signal Detected');
+        // Implement buy order logic here
+      } else if (lastRSI > 70) {
+        console.log('Sell Signal Detected');
+        // Implement sell order logic here
+      } else {
+        console.log('No Trading Signal');
+      }
+    } else {
+      console.log('RSI data not available');
+    }
+  };
+
 
   const highlightCrypto = (symbol) => {
     switch (symbol) {
@@ -55,7 +88,7 @@ const CryptoApp = () => {
   };
 
   return (
-    <div className="crypto-container">
+    <div className="app-container">
       <div className="table-responsive">
         <table className="table table-striped">
           <thead>
@@ -99,16 +132,16 @@ const CryptoApp = () => {
       </div>
 
       {fearAndGreedIndex && (
-        <div className="mt-4">
-          <h2 className="text-center">Fear and Greed Index</h2>
-          <p className="text-center">
-            Current value: {fearAndGreedIndex.value}
-          </p>
-          <p className="text-center">
-            Classification: {fearAndGreedIndex.value_classification}
-          </p>
+        <div>
+          <h3>Fear and Greed Index</h3>
+          <p>Value: {fearAndGreedIndex.data[0].value}</p>
         </div>
       )}
+    <div>
+      <p>Last RSI: {lastRSI || 'N/A'}</p>
+      <button onClick={calculateRSI}>Calculate RSI</button>
+      <button onClick={handleTradeDecision}>Execute Trade Decision</button>
+    </div>
     </div>
   );
 };

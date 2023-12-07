@@ -52,7 +52,7 @@ const BasketballApp = () => {
 
   return (
     <div className="BasketballApp">
-      <div className="card-container">
+      <div className="app-container">
         {playerInfo.length > 0 && (
           <div className="card" onClick={handleNextPlayer}>
             <img src={playerImages[playerIndex]} alt="Player" />

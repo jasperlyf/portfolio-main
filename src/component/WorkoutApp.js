@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import "./css/WorkoutApp.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap/lib/Tab";
 
@@ -105,7 +104,7 @@ const WorkoutApp = () => {
   };
 
   return (
-    <div className="workout-container">
+    <div className="app-container">
             <div className="summary">
         <h2>Summary</h2>
         <div className="summary-container" ref={summaryRef}>        
