@@ -24,22 +24,22 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/about">
+              <Link className="nav-link l-size" to="/portfolio-main/about">
                 About
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/food">
+              <Link className="nav-link l-size" to="/portfolio-main/food">
                 Food/Drinks
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/workout">
+              <Link className="nav-link l-size" to="/portfolio-main/workout">
                 Workout
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/crypto">
+              <Link className="nav-link l-size" to="/portfolio-main/crypto">
                 Crypto
               </Link>
             </li>

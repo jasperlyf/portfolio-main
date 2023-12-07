@@ -232,115 +232,135 @@ const FoodFinderApp = () => {
       </div> */}
 
       <div className="row">
-        <div className="col-8">
-          {/* Choose current location or Use custom list */}
-          <div className="row col-12">
-            <div className="food-card text-center col-12 col-md-5">
-              <label>
-                <input
-                  type="radio"
-                  name="location"
-                  value="current"
-                  checked={displayNearbyPlaces}
-                  onChange={() => handleToggleDisplay("current")}
-                />
-                {" "} Use Current Location
-              </label>
-              <div className="sub-text">Search for the nearest places to eat or drink from your current location.</div>
-            </div>
-            <div className="col-2">{" "}</div>
-            <br />
-            <div className="food-card text-center col-12 col-md-5">
-              <label>
-                <input
-                  type="radio"
-                  name="location"
-                  value="custom"
-                  checked={!displayNearbyPlaces}
-                  onChange={() => handleToggleDisplay("custom")}
-                />
-                {" "} Use Custom List
-              </label>
-              <div className="sub-text">Search for food from my custom list of favorite food and drinks.</div>
-            </div>
-          </div>
-          <br />
+        <div className="col-4 p-2">
 
-          {/*  Search function */}
-          <div className="row col-12 food-card">
-            <div className="col-12 col-md-9">
-              {displayNearbyPlaces ? (
-                <select
-                  className="form-select food-drop-box"
-                  value={selectedCuisine}
-                  onChange={handleCuisineChange}
-                >
-                  {cuisineOptions.map((cuisine, index) => (
-                    <option key={index} value={cuisine}>
-                      {cuisine}
-                    </option>
-                  ))}
-                </select>
-              ) : (
-                <select
-                  className="form-select food-drop-box"
-                  value={selectedCustomCuisine}
-                  onChange={handleCustomCuisineChange}
-                >
-                  {customCuisineOptions.map((cuisine, index) => (
-                    <option key={index} value={cuisine}>
-                      {cuisine}
-                    </option>
-                  ))}
-                </select>
-              )}
-              {displayNearbyPlaces ? (<div></div>
-              ) : (
-                <div className="form-check text-center">
+          <div className="row">
+            <div className="col-12 food-card">
+              {/* First radio button */}
+              <div className="text-center">
+                <label>
                   <input
-                    className="form-check-input"
-                    type="checkbox"
-                    id="drinkCheckbox"
-                    checked={includeDrinks}
-                    onChange={(e) => setIncludeDrinks(e.target.checked)}
+                    type="radio"
+                    name="location"
+                    value="current"
+                    checked={displayNearbyPlaces}
+                    onChange={() => handleToggleDisplay("current")}
                   />
-                  <label className="form-check-label" htmlFor="drinkCheckbox">
-                    Drinks
-                  </label>
-                </div>
-              )}
-            </div>
-            <div className="col-6 col-md-3 p-2">
-              {displayNearbyPlaces ? (
-                <button className="btn btn-primary" onClick={handleSearch}>
-                  Search
-                </button>
-              ) : (
-                <button className="btn btn-primary" onClick={handleCustomSearch}>
-                  Search
-                </button>
-              )}
+                  {" "} Current Location
+                </label>
+                {/* <div className="sub-text">Search for the nearest places to eat or drink from your current location.</div> */}
+              </div>
+
+              {/* Second radio button */}
+              <div className="text-center">
+                <label>
+                  <input
+                    type="radio"
+                    name="location"
+                    value="custom"
+                    checked={!displayNearbyPlaces}
+                    onChange={() => handleToggleDisplay("custom")}
+                  />
+                  {" "} Custom List
+                </label>
+                {/* <div className="sub-text">Search for food from my custom list of favorite food and drinks.</div> */}
+              </div>
             </div>
           </div>
         </div>
 
+        {/*  Search function */}
+        <div className="col-8">
+          <div className="col-12 p-2">
+            {displayNearbyPlaces ? (
+              <select
+                className="form-select food-drop-box"
+                value={selectedCuisine}
+                onChange={handleCuisineChange}
+              >
+                {cuisineOptions.map((cuisine, index) => (
+                  <option key={index} value={cuisine}>
+                    {cuisine}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <select
+                className="form-select food-drop-box"
+                value={selectedCustomCuisine}
+                onChange={handleCustomCuisineChange}
+              >
+                {customCuisineOptions.map((cuisine, index) => (
+                  <option key={index} value={cuisine}>
+                    {cuisine}
+                  </option>
+                ))}
+              </select>
+            )}
+          </div>
+          <div className="col-12 d-flex align-items-center justify-content-center">
 
-        <div className="col-4">
+            {displayNearbyPlaces ? (<div className="col-2"></div>
+            ) : (
+              <div className="form-check col-2">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  id="drinkCheckbox"
+                  checked={includeDrinks}
+                  onChange={(e) => setIncludeDrinks(e.target.checked)}
+                />
+                <label className="form-check-label s-word-size" htmlFor="drinkCheckbox">
+                  Drinks
+                </label>
+              </div>
+            )}
+
+            {/*  Sort function */}
+            <div className="col-5">
+              {displayNearbyPlaces ? (
+                <button className="btn btn-secondary s-word-size " onClick={handleSort}>
+                  {sortByAsc ? "Sort ↑"
+                    : "Sort ↓"}
+                </button>
+              ) : (
+                <button className="btn btn-secondary s-word-size " onClick={handleCustomSort}>
+                  {sortCustomByAsc ? "Sort ↑"
+                    : "Sort ↓"}
+                </button>
+              )}
+            </div>
+
+            {displayNearbyPlaces ? (
+              <button className="btn s-word-size btn-primary col-5" onClick={handleSearch}>
+                Search
+              </button>
+            ) : (
+              <button className="btn s-word-size btn-primary col-5" onClick={handleCustomSearch}>
+                Search
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-4 p-2">
           {/* Random food/drink Generator */}
-          <div className="row p-2">
-            <div className="text-center col-12 food-card">
+          <div className="row">
+            <div className="text-center col-12 col-md-12 food-card">
               <div className="food-card">
-                <p>Random Food/Drink Generator</p>
+                <p>Random Generator</p>
                 {displayNearbyPlaces ? (
-                  <button className="btn btn-primary col-10" onClick={handleRandomPicker}>
-                    Random
+                  <button className="btn s-word-size btn-primary col-10" onClick={handleRandomPicker}>
+                    Generate
                   </button>
                 ) : (
                   <button
-                    className="btn btn-primary col-10"
+                    className="btn s-word-size btn-primary col-10"
                     onClick={handleRandomCustomPicker}
                   >
-                    Random
+                    Generate
                   </button>
                 )}
                 <div className="text-center">
@@ -363,99 +383,66 @@ const FoodFinderApp = () => {
             </div>
           </div>
         </div>
-      </div>
 
-      <br />
+        <div className="col-8">
+          {/* List of Food/Drinks
+          <div className="row">
+            <div className="col-10">
+              <h3 className="text-center">
+                {displayNearbyPlaces ? "Nearby Recommended List" : "Custom List"}
+              </h3>
+            </div>
+          </div> */}
 
-      {/* List of Food/Drinks */}
-      <div className="row">
-        <div className="col-12 col-md-10">
-          <h2 className="text-center">
-            {displayNearbyPlaces ? "Nearby Recommended List" : "Custom List"}
-          </h2>
-        </div>
-
-        {/*  Sort function */}
-        <div className="col-12 col-md-2">
-          {displayNearbyPlaces ? (
-            <button className="btn btn-secondary" onClick={handleSort}>
-              {sortByAsc ? <img
-                src="https://www.shareicon.net/data/512x512/2015/12/17/688785_arrows_512x512.png"
-                alt="Arrow Up"
-                style={{ width: "20px", height: "20px", display: "inline-block", filter: "invert(100%)" }}
-              /> : <img
-                src="https://www.shareicon.net/data/512x512/2015/12/17/688785_arrows_512x512.png"
-                alt="Arrow Up"
-                style={{ width: "20px", height: "20px", display: "inline-block", transform: "scaleY(-1)", filter: "invert(100%)" }}
-              />}
-            </button>
-          ) : (
-            <button className="btn btn-secondary" onClick={handleCustomSort}>
-              {sortCustomByAsc ? <img
-                src="https://www.shareicon.net/data/512x512/2015/12/17/688785_arrows_512x512.png"
-                alt="Arrow Up"
-                style={{ width: "20px", height: "20px", display: "inline-block", filter: "invert(100%)" }}
-              /> : <img
-                src="https://www.shareicon.net/data/512x512/2015/12/17/688785_arrows_512x512.png"
-                alt="Arrow Up"
-                style={{ width: "20px", height: "20px", display: "inline-block", transform: "scaleY(-1)", filter: "invert(100%)" }}
-              />}
-            </button>
-          )}
-        </div>
-      </div>
-
-      {/* List of Food/Drinks */}
-      <div className="row">
-        <div className="col-12">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Cuisine</th>
-                <th>Map URL</th>
-              </tr>
-            </thead>
-            <tbody>
-              {displayNearbyPlaces
-                ? sortedFoods.map((place, index) => (
-                  // Display nearby food items
-                  <tr key={index}>
-                    <td>{place.tags?.name || "Unnamed Place"}</td>
-                    <td>{place.tags?.cuisine || "Unknown Type"}</td>
-                    <td>
-                      {" "}
-                      <a
-                        href={generateGoogleSearchLink(place.tags?.name)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="highlight-underline"
-                      >
-                        View
-                      </a>
-                    </td>
-                  </tr>
-                ))
-                : // Display favorite food items in the custom list
-                sortedCustomFoods.map((favorite, index) => (
-                  <tr key={index}>
-                    <td>{favorite.name}</td>
-                    <td>{favorite.cuisine}</td>
-                    <td>
-                      {" "}
-                      <a
-                        href={generateGoogleSearchLink(favorite.name)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="highlight-underline"
-                      >
-                        View
-                      </a>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+          {/* List of Food/Drinks */}
+          <div className="col-12 p-2">
+            <table className="table table-bordered">
+              <thead>
+                <tr>
+                  <th className="col-3">Name</th>
+                  <th className="col-6">Cuisine</th>
+                  <th className="col-3">Map URL</th>
+                </tr>
+              </thead>
+              <tbody className="s-word-size">
+                {/* Your conditional rendering here */}
+                {displayNearbyPlaces
+                  ? sortedFoods.map((place, index) => (
+                    // Display nearby food items
+                    <tr key={index}>
+                      <td>{place.tags?.name || "Unnamed Place"}</td>
+                      <td>{place.tags?.cuisine || "Unknown Type"}</td>
+                      <td>
+                        <a
+                          href={generateGoogleSearchLink(place.tags?.name)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="highlight-underline"
+                        >
+                          View
+                        </a>
+                      </td>
+                    </tr>
+                  ))
+                  : sortedCustomFoods.map((favorite, index) => (
+                    <tr key={index}>
+                      <td>{favorite.name}</td>
+                      <td>{favorite.cuisine}</td>
+                      <td>
+                        <a
+                          href={generateGoogleSearchLink(favorite.name)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="highlight-underline"
+                        >
+                          View
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div >

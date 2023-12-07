@@ -19,10 +19,10 @@ function App() {
           <div className="col-lg-12 col-md-12 d-flex justify-content-center align-items-center">
             <div className="col-lg-12 col-md-12">
               <Switch>
-                <Route path="/about" component={About} />
-                <Route path="/food" component={FoodApp} />
-                <Route path="/workout" component={WorkoutApp} />
-                <Route path="/crypto" component={CryptoApp} />
+                <Route path="/portfolio-main/about" component={About} />
+                <Route path="/portfolio-main/food" component={FoodApp} />
+                <Route path="/portfolio-main/workout" component={WorkoutApp} />
+                <Route path="/portfolio-main/crypto" component={CryptoApp} />
                 <Route exact path="/portfolio-main" component={MusicAppContainer} />
                 {/* other routes go here */}
               </Switch>
