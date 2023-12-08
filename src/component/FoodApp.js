@@ -232,10 +232,10 @@ const FoodFinderApp = () => {
       </div> */}
 
       <div className="row">
-        <div className="col-4 p-2">
+        <div className="col-8 p-2">
 
           <div className="row">
-            <div className="col-12 food-card">
+            <div className="col-6">
               {/* First radio button */}
               <div className="text-center">
                 <label>
@@ -248,9 +248,10 @@ const FoodFinderApp = () => {
                   />
                   {" "} Current Location
                 </label>
-                {/* <div className="sub-text">Search for the nearest places to eat or drink from your current location.</div> */}
+                <div className="sub-text">Search for the nearest places to eat or drink from your current location.</div>
               </div>
-
+            </div>
+            <div className="col-6">
               {/* Second radio button */}
               <div className="text-center">
                 <label>
@@ -263,92 +264,93 @@ const FoodFinderApp = () => {
                   />
                   {" "} Custom List
                 </label>
-                {/* <div className="sub-text">Search for food from my custom list of favorite food and drinks.</div> */}
+                <div className="sub-text">Search for food from my custom list of favorite food and drinks.</div>
               </div>
             </div>
           </div>
-        </div>
-
-        {/*  Search function */}
-        <div className="col-8">
-          <div className="col-12 p-2">
-            {displayNearbyPlaces ? (
-              <select
-                className="form-select food-drop-box"
-                value={selectedCuisine}
-                onChange={handleCuisineChange}
-              >
-                {cuisineOptions.map((cuisine, index) => (
-                  <option key={index} value={cuisine}>
-                    {cuisine}
-                  </option>
-                ))}
-              </select>
-            ) : (
-              <select
-                className="form-select food-drop-box"
-                value={selectedCustomCuisine}
-                onChange={handleCustomCuisineChange}
-              >
-                {customCuisineOptions.map((cuisine, index) => (
-                  <option key={index} value={cuisine}>
-                    {cuisine}
-                  </option>
-                ))}
-              </select>
-            )}
-          </div>
-          <div className="col-12 d-flex align-items-center justify-content-center">
-
-            {displayNearbyPlaces ? (<div className="col-2"></div>
-            ) : (
-              <div className="form-check col-2">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  id="drinkCheckbox"
-                  checked={includeDrinks}
-                  onChange={(e) => setIncludeDrinks(e.target.checked)}
-                />
-                <label className="form-check-label s-word-size" htmlFor="drinkCheckbox">
-                  Drinks
-                </label>
+          <div className="row">
+            <br />
+            {/*  Search function */}
+            <div className="col-12">
+              <div className="col-12 p-2">
+                {displayNearbyPlaces ? (
+                  <select
+                    className="form-select food-drop-box"
+                    value={selectedCuisine}
+                    onChange={handleCuisineChange}
+                  >
+                    {cuisineOptions.map((cuisine, index) => (
+                      <option key={index} value={cuisine}>
+                        {cuisine}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <select
+                    className="form-select food-drop-box"
+                    value={selectedCustomCuisine}
+                    onChange={handleCustomCuisineChange}
+                  >
+                    {customCuisineOptions.map((cuisine, index) => (
+                      <option key={index} value={cuisine}>
+                        {cuisine}
+                      </option>
+                    ))}
+                  </select>
+                )}
               </div>
-            )}
+              <div className="col-12 d-flex align-items-center justify-content-center">
 
-            {/*  Sort function */}
-            <div className="col-5">
-              {displayNearbyPlaces ? (
-                <button className="btn btn-secondary s-word-size " onClick={handleSort}>
-                  {sortByAsc ? "Sort ↑"
-                    : "Sort ↓"}
-                </button>
-              ) : (
-                <button className="btn btn-secondary s-word-size " onClick={handleCustomSort}>
-                  {sortCustomByAsc ? "Sort ↑"
-                    : "Sort ↓"}
-                </button>
-              )}
+                {displayNearbyPlaces ? (<div className="col-2"></div>
+                ) : (
+                  <div className="form-check col-2">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      id="drinkCheckbox"
+                      checked={includeDrinks}
+                      onChange={(e) => setIncludeDrinks(e.target.checked)}
+                    />
+                    <label className="form-check-label s-word-size" htmlFor="drinkCheckbox">
+                      Drinks
+                    </label>
+                  </div>
+                )}
+
+                {/*  Sort function */}
+                <div className="col-5">
+                  {displayNearbyPlaces ? (
+                    <button className="btn btn-secondary s-word-size " onClick={handleSort}>
+                      {sortByAsc ? "Sort ↑"
+                        : "Sort ↓"}
+                    </button>
+                  ) : (
+                    <button className="btn btn-secondary s-word-size " onClick={handleCustomSort}>
+                      {sortCustomByAsc ? "Sort ↑"
+                        : "Sort ↓"}
+                    </button>
+                  )}
+                </div>
+
+                {displayNearbyPlaces ? (
+                  <button className="btn s-word-size btn-primary col-5" onClick={handleSearch}>
+                    Search
+                  </button>
+                ) : (
+                  <button className="btn s-word-size btn-primary col-5" onClick={handleCustomSearch}>
+                    Search
+                  </button>
+                )}
+              </div>
             </div>
-
-            {displayNearbyPlaces ? (
-              <button className="btn s-word-size btn-primary col-5" onClick={handleSearch}>
-                Search
-              </button>
-            ) : (
-              <button className="btn s-word-size btn-primary col-5" onClick={handleCustomSearch}>
-                Search
-              </button>
-            )}
           </div>
-        </div>
-      </div>
 
-      <div className="row">
+        </div>
+
         <div className="col-4 p-2">
           {/* Random food/drink Generator */}
           <div className="row">
-            <div className="text-center col-12 col-md-12 food-card">
+            <div className="text-center col-12 col-md-12">
               <div className="food-card">
                 <p>Random Generator</p>
                 {displayNearbyPlaces ? (
@@ -363,7 +365,7 @@ const FoodFinderApp = () => {
                     Generate
                   </button>
                 )}
-                <div className="text-center">
+                <div className="text-center s-word-size">
                   <br />
                   {randomFood && (
                     <p>
@@ -372,7 +374,7 @@ const FoodFinderApp = () => {
                         href={googleSearchLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="highlight-underline"
+                        className="highlight-underline "
                       >
                         {" " + randomFood}
                       </a>
@@ -383,9 +385,12 @@ const FoodFinderApp = () => {
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="col-8">
-          {/* List of Food/Drinks
+
+      <div className="row">
+        {/* <div className="col-8"> */}
+        {/* List of Food/Drinks
           <div className="row">
             <div className="col-10">
               <h3 className="text-center">
@@ -394,58 +399,57 @@ const FoodFinderApp = () => {
             </div>
           </div> */}
 
-          {/* List of Food/Drinks */}
-          <div className="col-12 p-2">
-            <table className="table table-bordered">
-              <thead>
-                <tr>
-                  <th className="col-3">Name</th>
-                  <th className="col-6">Cuisine</th>
-                  <th className="col-3">Map URL</th>
-                </tr>
-              </thead>
-              <tbody className="s-word-size">
-                {/* Your conditional rendering here */}
-                {displayNearbyPlaces
-                  ? sortedFoods.map((place, index) => (
-                    // Display nearby food items
-                    <tr key={index}>
-                      <td>{place.tags?.name || "Unnamed Place"}</td>
-                      <td>{place.tags?.cuisine || "Unknown Type"}</td>
-                      <td>
-                        <a
-                          href={generateGoogleSearchLink(place.tags?.name)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="highlight-underline"
-                        >
-                          View
-                        </a>
-                      </td>
-                    </tr>
-                  ))
-                  : sortedCustomFoods.map((favorite, index) => (
-                    <tr key={index}>
-                      <td>{favorite.name}</td>
-                      <td>{favorite.cuisine}</td>
-                      <td>
-                        <a
-                          href={generateGoogleSearchLink(favorite.name)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="highlight-underline"
-                        >
-                          View
-                        </a>
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-          </div>
+        {/* List of Food/Drinks */}
+        <div className="col-12 p-2">
+          <table className="table table-bordered">
+            <thead>
+              <tr>
+                <th className="col-3">Name</th>
+                <th className="col-6">Cuisine</th>
+                <th className="col-3">Map URL</th>
+              </tr>
+            </thead>
+            <tbody className="s-word-size">
+              {/* Your conditional rendering here */}
+              {displayNearbyPlaces
+                ? sortedFoods.map((place, index) => (
+                  // Display nearby food items
+                  <tr key={index}>
+                    <td>{place.tags?.name || "Unnamed Place"}</td>
+                    <td>{place.tags?.cuisine || "Unknown Type"}</td>
+                    <td>
+                      <a
+                        href={generateGoogleSearchLink(place.tags?.name)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="highlight-underline"
+                      >
+                        View
+                      </a>
+                    </td>
+                  </tr>
+                ))
+                : sortedCustomFoods.map((favorite, index) => (
+                  <tr key={index}>
+                    <td>{favorite.name}</td>
+                    <td>{favorite.cuisine}</td>
+                    <td>
+                      <a
+                        href={generateGoogleSearchLink(favorite.name)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="highlight-underline"
+                      >
+                        View
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 
