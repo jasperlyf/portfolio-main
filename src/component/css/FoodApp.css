@@ -33,6 +33,11 @@
     background-color: burlywood;
     border: #ccc;
   }
+
+  .btn-blue {
+    background-color:#007bff;
+    /* Add any other styles as needed */
+  }
   
 .sub-text{
     font-size: 11px;

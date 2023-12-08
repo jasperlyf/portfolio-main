@@ -235,7 +235,7 @@ const FoodFinderApp = () => {
         <div className="col-8 p-2">
 
           <div className="row">
-            <div className="col-6">
+            <div className="col-6 p-2">
               {/* First radio button */}
               <div className="text-center">
                 <label>
@@ -251,7 +251,7 @@ const FoodFinderApp = () => {
                 <div className="sub-text">Search for the nearest places to eat or drink from your current location.</div>
               </div>
             </div>
-            <div className="col-6">
+            <div className="col-6 p-2">
               {/* Second radio button */}
               <div className="text-center">
                 <label>
@@ -301,9 +301,9 @@ const FoodFinderApp = () => {
               </div>
               <div className="col-12 d-flex align-items-center justify-content-center">
 
-                {displayNearbyPlaces ? (<div className="col-2"></div>
+                {displayNearbyPlaces ? (<div className="col-3"></div>
                 ) : (
-                  <div className="form-check col-2">
+                  <div className="form-check col-3">
                     <input
                       className="form-check-input"
                       type="checkbox"
@@ -321,23 +321,23 @@ const FoodFinderApp = () => {
                 <div className="col-5">
                   {displayNearbyPlaces ? (
                     <button className="btn btn-secondary s-word-size " onClick={handleSort}>
-                      {sortByAsc ? "Sort ↑"
-                        : "Sort ↓"}
+                      {sortByAsc ? "Sort↑"
+                        : "Sort↓"}
                     </button>
                   ) : (
                     <button className="btn btn-secondary s-word-size " onClick={handleCustomSort}>
-                      {sortCustomByAsc ? "Sort ↑"
-                        : "Sort ↓"}
+                      {sortCustomByAsc ? "Sort↑"
+                        : "Sort↓"}
                     </button>
                   )}
                 </div>
 
                 {displayNearbyPlaces ? (
-                  <button className="btn s-word-size btn-primary col-5" onClick={handleSearch}>
+                  <button className="btn btn-blue s-word-size btn-primary col-4" onClick={handleSearch}>
                     Search
                   </button>
                 ) : (
-                  <button className="btn s-word-size btn-primary col-5" onClick={handleCustomSearch}>
+                  <button className="btn btn-blue s-word-size btn-primary col-4" onClick={handleCustomSearch}>
                     Search
                   </button>
                 )}
