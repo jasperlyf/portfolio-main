@@ -15,14 +15,14 @@ function App() {
     <Router>
       <div className="main-app-container container-fluid p-3">
         <Navbar /> {/* Navbar always displayed */}
-        <div className="row content">
+        <div className="row content" style={{ marginTop: "60px" }}>
           <div className="col-lg-12 col-md-12 d-flex justify-content-center align-items-center">
             <div className="col-lg-12 col-md-12">
               <Switch>
-                <Route path="/portfolio-main/about" component={About} />
-                <Route path="/portfolio-main/food" component={FoodApp} />
-                <Route path="/portfolio-main/workout" component={WorkoutApp} />
-                <Route path="/portfolio-main/crypto" component={CryptoApp} />
+                <Route path="/portfolio-main/about" component={AboutContainer} />
+                <Route path="/portfolio-main/food" component={FoodAppContainer} />
+                <Route path="/portfolio-main/workout" component={WorkoutAppContainer} />
+                <Route path="/portfolio-main/crypto" component={CryptoAppContainer} />
                 <Route exact path="/portfolio-main" component={MusicAppContainer} />
                 {/* other routes go here */}
               </Switch>
@@ -40,6 +40,42 @@ const MusicAppContainer = () => {
     <div>
       {/* Place your MusicApp component directly */}
       <MusicApp />
+    </div>
+  );
+};
+
+const AboutContainer = () => {
+  return (
+    <div>
+      {/* Place your MusicApp component directly */}
+      <About />
+    </div>
+  );
+};
+
+const FoodAppContainer = () => {
+  return (
+    <div>
+      {/* Place your MusicApp component directly */}
+      <FoodApp />
+    </div>
+  );
+};
+
+const WorkoutAppContainer = () => {
+  return (
+    <div>
+      {/* Place your MusicApp component directly */}
+      <WorkoutApp />
+    </div>
+  );
+};
+
+const CryptoAppContainer = () => {
+  return (
+    <div>
+      {/* Place your MusicApp component directly */}
+      <CryptoApp />
     </div>
   );
 };

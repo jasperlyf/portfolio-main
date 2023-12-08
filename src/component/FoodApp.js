@@ -175,6 +175,23 @@ const FoodFinderApp = () => {
     console.log(event.target.value);
   };
 
+  // Checkbox
+  const handleDrinkCheckbox = (e) => {
+    const isChecked = e.target.checked;
+    setIncludeDrinks(isChecked);
+
+    // Trigger search when checkbox is checked
+    if (isChecked) {
+      if (displayNearbyPlaces) {
+        handleSearch();
+      } else {
+        handleCustomSearch();
+
+      }
+    }
+  };
+
+
   //Search
   const handleSearch = () => {
     let filteredFoods = [...nearbyFoodPlaces];
@@ -232,8 +249,38 @@ const FoodFinderApp = () => {
       </div> */}
 
       <div className="row">
-        <div className="col-8 p-2">
+        <div className="col-12 d-flex justify-content-center">
+          {/* Random food/drink Generator */}
+          <div className="text-center col-6">
+            <div className="food-card">
+              <p>Random Food Generator</p>
+              <button className="btn s-word-size btn-primary col-10" onClick={displayNearbyPlaces ? handleRandomPicker : handleRandomCustomPicker}>
+                Generate
+              </button>
+              <div className="text-center s-word-size">
+                <br />
+                {randomFood && (
+                  <p>
+                    Food/Drinks:
+                    <a
+                      href={googleSearchLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="highlight-underline "
+                    >
+                      {" " + randomFood}
+                    </a>
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
+
+      <div className="row">
+        <div className="col-12 p-2">
           <div className="row">
             <div className="col-6 p-2">
               {/* First radio button */}
@@ -262,17 +309,17 @@ const FoodFinderApp = () => {
                     checked={!displayNearbyPlaces}
                     onChange={() => handleToggleDisplay("custom")}
                   />
-                  {" "} Custom List
+                  {" "} Custom Food List
                 </label>
                 <div className="sub-text">Search for food from my custom list of favorite food and drinks.</div>
               </div>
             </div>
           </div>
+
           <div className="row">
-            <br />
             {/*  Search function */}
-            <div className="col-12">
-              <div className="col-12 p-2">
+            <div className="col-12 p-2">
+              <div className="col-12">
                 {displayNearbyPlaces ? (
                   <select
                     className="form-select food-drop-box"
@@ -299,26 +346,32 @@ const FoodFinderApp = () => {
                   </select>
                 )}
               </div>
-              <div className="col-12 d-flex align-items-center justify-content-center">
+            </div>
+          </div>
 
-                {displayNearbyPlaces ? (<div className="col-3"></div>
-                ) : (
-                  <div className="form-check col-3">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      id="drinkCheckbox"
-                      checked={includeDrinks}
-                      onChange={(e) => setIncludeDrinks(e.target.checked)}
-                    />
-                    <label className="form-check-label s-word-size" htmlFor="drinkCheckbox">
-                      Drinks
-                    </label>
-                  </div>
-                )}
+          <div className="row">
+            <div className="col-12">
+              <div className="row">
+                <div className="col-3 p-12">
+                  {!displayNearbyPlaces ? (
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id="drinkCheckbox"
+                        checked={includeDrinks}
+                        onChange={handleDrinkCheckbox}
+                      // onChange={(e) => setIncludeDrinks(e.target.checked)}
+                      />
+                      <label className="form-check-label s-word-size" htmlFor="drinkCheckbox">
+                        Drinks
+                      </label>
+                    </div>
+                  ) : null}
+                </div>
 
                 {/*  Sort function */}
-                <div className="col-5">
+                <div className="col-4">
                   {displayNearbyPlaces ? (
                     <button className="btn btn-secondary s-word-size " onClick={handleSort}>
                       {sortByAsc ? "Sort↑"
@@ -332,53 +385,16 @@ const FoodFinderApp = () => {
                   )}
                 </div>
 
-                {displayNearbyPlaces ? (
-                  <button className="btn btn-blue s-word-size btn-primary col-4" onClick={handleSearch}>
-                    Search
-                  </button>
-                ) : (
-                  <button className="btn btn-blue s-word-size btn-primary col-4" onClick={handleCustomSearch}>
-                    Search
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div className="col-4 p-2">
-          {/* Random food/drink Generator */}
-          <div className="row">
-            <div className="text-center col-12 col-md-12">
-              <div className="food-card">
-                <p>Random Generator</p>
-                {displayNearbyPlaces ? (
-                  <button className="btn s-word-size btn-primary col-10" onClick={handleRandomPicker}>
-                    Generate
-                  </button>
-                ) : (
-                  <button
-                    className="btn s-word-size btn-primary col-10"
-                    onClick={handleRandomCustomPicker}
-                  >
-                    Generate
-                  </button>
-                )}
-                <div className="text-center s-word-size">
-                  <br />
-                  {randomFood && (
-                    <p>
-                      Food/Drinks:
-                      <a
-                        href={googleSearchLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="highlight-underline "
-                      >
-                        {" " + randomFood}
-                      </a>
-                    </p>
+                {/* Search Function */}
+                <div className="col-5">
+                  {displayNearbyPlaces ? (
+                    <button className="btn btn-blue s-word-size btn-primary" onClick={handleSearch}>
+                      Search
+                    </button>
+                  ) : (
+                    <button className="btn btn-blue s-word-size btn-primary" onClick={handleCustomSearch}>
+                      Search
+                    </button>
                   )}
                 </div>
               </div>

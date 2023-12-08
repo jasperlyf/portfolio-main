@@ -6,7 +6,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-md navbar-light">
-      <div className="container">
+      <div className="container-fluid">
         <Link className="navbar-brand text-black" to="/portfolio-main">
           Jasper Ling
         </Link>
@@ -21,27 +21,37 @@ const Navbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ml-auto">
+        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul className="navbar-nav">
             <li className="nav-item">
               <Link className="nav-link l-size" to="/portfolio-main/about">
                 About
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link l-size" to="/portfolio-main/food">
-                Food/Drinks
+            {/* Projects link with sublinks */}
+            <li className="nav-item dropdown">
+              <Link
+                className="nav-link dropdown-toggle"
+                to="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Projects
               </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link l-size" to="/portfolio-main/workout">
-                Workout
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link l-size" to="/portfolio-main/crypto">
-                Crypto
-              </Link>
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <Link className="dropdown-item" to="/portfolio-main/food">
+                  Food/Drinks
+                </Link>
+                <Link className="dropdown-item" to="/portfolio-main/workout">
+                  Workout
+                </Link>
+                <Link className="dropdown-item" to="/portfolio-main/crypto">
+                  Crypto
+                </Link>
+              </div>
             </li>
           </ul>
         </div>
