@@ -3,25 +3,25 @@ name: Deploy Static Website to S3
 on:
   push:
     branches:
-      - main  # Trigger on changes to the main branch
+      - main # Trigger on changes to the main branch
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu environment for the job
-    
+    runs-on: ubuntu-latest # Use the latest Ubuntu environment for the job
+
     steps:
-    # Checkout the code from the repository
-    - name: Checkout code
-      uses: actions/checkout@v2
-    
-    # Set up AWS CLI with credentials from GitHub Secrets
-    - name: Set up AWS CLI
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws_region: ap-southeast-1  # Make sure the region matches your S3 bucket's region
-    
-    # Sync the website files to S3
-    - name: Deploy to S3
-      run: aws s3 sync ./ s3://static-personal-portfolio-bucket --delete
+      # Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up AWS CLI with credentials from GitHub Secrets
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-southeast-1 # Change if needed
+
+      # Sync the website files to S3
+      - name: Deploy to S3
+        run: aws s3 sync ./ s3://static-personal-portfolio-bucket --delete
